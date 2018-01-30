@@ -1,0 +1,93 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" href="./js/jquery-ui-1.12.1.custom/jquery-ui.css">
+		<style>
+			table, a, .ui-widget button, p, input {
+				font-family: monospace;
+				font-size: 1.25em;
+			}
+			table {
+				color: #c9c9c9;
+				font-size: 1em;
+				white-space: nowrap;
+			}
+			.ui-spinner {
+				width: 100%;
+			}
+			.eventTable {
+				width: 100%;
+				border: 0px;
+			}
+			.eventTable .eventId {
+				text-align: left;
+				vertical-align: bottom;
+			}
+			.eventTable .playerName {
+				vertical-align: bottom;
+				width: 50%;
+			}
+			.eventTable .playerIconCell {
+				width: 0px;
+				padding-left: 16px;
+				padding-right: 16px;
+				text-align: center;
+				vertical-align: center;
+			}
+			.eventTable .playerIcon {
+				width: 32px;
+				height: 32px;
+			}
+			.ui-widget-content {
+				background: rgba(17, 17, 17, 0.75);
+			}
+			.ico_header {
+				font-size: 1.5em;
+				text-align: center;
+				font-weight: bold;
+			}
+			.roadmap {
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.roadmap td {
+				padding-left: 20px;
+			}
+		</style>
+		<script type="text/javascript" src="./ui.js"></script>
+		<script type="text/javascript" src="./abi.js"></script>
+		<script type="text/javascript" src="./core.js"></script>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script type="text/javascript" src="./js/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var ui = new EtherSweepUI();
+				ui.render(function() {
+					if (typeof web3 !== "undefined") {
+						var address = {
+							"1": "0x0C1FB838ff24033C0B28d6B38E184d0F8DAc17eE",
+							"3": "0xfc491eF390028589190417B4DA10F6a7e96268Df"
+						};
+						(function initLoop() {
+							var web3js = new Web3(web3.currentProvider);
+							var contract = web3js.eth.contract(abi).at(address[web3js.version.network]);
+							contract.decimals(function(err, decimals) {
+								if (decimals.toNumber() === 0) initLoop();
+								else {
+									if (web3js.eth.defaultAccount === undefined) ui.external.changeState(3);
+									else contract.symbol(function(err, symbol) {
+										var app = new App(web3js, contract, decimals.toNumber(), symbol, ui.external);
+										ui.setController(app.controller);
+										app.init();
+									});
+								}
+							});
+						})();
+					} else ui.external.changeState(1);
+				});
+			});
+		</script>
+	</head>
+	<body style='background-image: url(./img/background.png); background-repeat: no-repeat; background-position: center; background-color: black'>
+	</body>
+</html>
