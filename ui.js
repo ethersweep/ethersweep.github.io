@@ -230,7 +230,7 @@ function EtherSweepUI() {
 			switch(state) {
 				case 0: {
 					$("body").html(loadingScreen.html() + footerHtml);
-					loadingScreen.content("Loading").html("<img src='http://i.stack.imgur.com/FhHRx.gif'/>")
+					loadingScreen.content("Loading").html("<img src='./img/loading.png'/>")
 					loadingScreen.render();
 					break;
 				}
