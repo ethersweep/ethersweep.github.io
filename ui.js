@@ -144,12 +144,13 @@ function EtherSweepUI() {
 			html: screen.html,
 			render: function() {
 				screen.content("About").html(whitepaper.html());
-				screen.content("ICO").html("<table style='margin-left: auto; margin-right: auto; font-size: 1.25em'><tr><td style='text-align: right'>Address:</td><td id='_address' colspan='2'>Loading...</td></tr><tr><td style='text-align: right'>Balance:</td><td id='_balance' style='width: 0px'>Loading...</td><td style='border: 1px solid rgba(0, 255, 0, 0.3); padding: 0'><button id='_deposit_btn' style='width: 100%; padding: 0'>Deposit</button></td></tr><tr><td></td><td id='_balance_eth'></td><td style='border: 1px solid rgba(255, 0, 0, 0.3); padding: 0'><button id='_withdraw_btn' style='width: 100%; padding: 0'>Withdraw</button></td></tr><tr><td>ICO token price:</td><td id='_token_price'></td></tr><tr><td style='text-align: right'>ICO progress:</td><td style='background-color: #555555; height: 100%'><div id='ico_progress' style='height: 100%; background-color: #00CCCC'></div></td></tr></table>");
+				screen.content("ICO").html("<table style='margin-left: auto; margin-right: auto; font-size: 1.25em'><tr><td style='text-align: right'>Address:</td><td id='_address' colspan='2'>Loading...</td></tr><tr><td style='text-align: right'>Balance:</td><td id='_balance' style='width: 0px'>Loading...</td><td style='border: 1px solid rgba(0, 255, 0, 0.3); padding: 0'><button id='_deposit_btn' style='width: 100%; padding: 0'>Deposit</button></td></tr><tr><td></td><td id='_balance_eth'></td><td style='border: 1px solid rgba(255, 0, 0, 0.3); padding: 0'><button id='_withdraw_btn' style='width: 100%; padding: 0'>Withdraw</button></td></tr><tr><td>ICO token price:</td><td id='_token_price'></td></tr><tr><td style='text-align: right'>ICO progress:</td><td style='background-color: #555555; height: 0px'><div id='ico_progress' style='height: 100%; background-color: #00CCCC; z-index: -1'></div></td></tr></table>");
 				$("#_deposit_btn").button().click(function() {
 					var html = $("<div title='Deposit ETH'/>").html("<p>Buy <span id='buy_amount'></span> " + symbol + " for <span id='buy_cost'></span> ETH</p><p><input id='spinner' name='value' value='0'></p><p style='text-align: right'><button id='buy_submit' disabled>Buy</button></p>");
 					var spinner = html.find("#spinner");
 					var value;
 					spinner.spinner({step: 0.001, min: 0, incremental: false});
+					spinner.width("85%")
 					function onSpin() {
 						value = spinner.spinner("value");
 						if (value <= 0) html.find("#buy_submit").prop("disabled", true);
@@ -177,6 +178,7 @@ function EtherSweepUI() {
 					var spinner = html.find("#spinner");
 					var value;
 					spinner.spinner({step: 1, min: 0, max: balanceEST, incremental: false});
+					spinner.width("85%")
 					function onSpin() {
 						value = spinner.spinner("value");
 						if (value <= 0 || value > balanceEST) html.find("#withdraw_submit").prop("disabled", true);
