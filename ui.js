@@ -236,7 +236,7 @@ function EtherSweepUI() {
 				}
 				case 1: {
 					$("body").html(metamaskScreen.html() + footerHtml);
-					metamaskScreen.content("Getting Started").html("<p>1. Install <a href='https://metamask.io/'>MetaMask</a></p><p>2. Refresh page</p>");
+					metamaskScreen.content("Getting Started").html("<p>1. Install <a href='https://metamask.io/' target='_blank'>MetaMask</a></p><p>2. Refresh page</p>");
 					metamaskScreen.render();
 					break;
 				}
