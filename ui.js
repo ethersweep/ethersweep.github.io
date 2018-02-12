@@ -21,9 +21,9 @@ function EtherSweepUI() {
 			}
 		};
 	}
-	var players = {"navi": "Na`Vi", "c9": "Cloud9", "fnatic": "Fnatic", "alliance": "Alliance", "virtuspro": "Virtus.pro"};
-	var pics = {"navi": "navi.png", "c9": "c9.png", "fnatic": "fnatic.png", "alliance": "alliance.png", "virtuspro": "virtuspro.png"};
-	var tournaments = {"dreamhack": "DreamHack", "dreamleague": "DreamLeague", "starladder": "StarLadder"};
+	var players = {"navi": "Na`Vi", "c9": "Cloud9", "fnatic": "Fnatic", "alliance": "Alliance", "virtuspro": "Virtus.pro", "boka": "Random player #1", "joka": "Random player #2"};
+	var pics = {"navi": "navi.png", "c9": "c9.png", "fnatic": "fnatic.png", "alliance": "alliance.png", "virtuspro": "virtuspro.png", "boka": "boka.png", "joka": "joka.png"};
+	var tournaments = {"dreamhack": "DreamHack", "dreamleague": "DreamLeague", "starladder": "StarLadder", "test": "Random tournament"};
 	var eventCache = {};
 	function BetEvent(id, onReady) {
 		if (eventCache[id]) return eventCache[id];
@@ -68,7 +68,7 @@ function EtherSweepUI() {
 					$("#betEvent_" + id + "_" + index + "_div").height((100 * Math.min(1.5 * banks[index] / (banks.reduce(function(res, value) { return res + value }, 0) || 1), 1)) + "%");
 					if (data.until >= Date.now() / 1000) {
 						$("#betEvent_" + id + "_" + index).click(function() {
-							var html = $("<div/>").html("<p>Bet <span id='bet_amount'></span> ETH on <span id='bet_player'></span></p><p><input id='spinner' name='value' value='0'></p><p style='text-align: right'><button id='bet_submit' disabled>Make bet</button></p>");
+							var html = $("<div title='Make bet'/>").html("<p>Bet <span id='bet_amount'></span> ETH on <span id='bet_player'></span></p><p><input id='spinner' name='value' value='0'></p><p style='text-align: right'><button id='bet_submit' disabled>Make bet</button></p>");
 							html.find("#bet_player").html(index == 0 ? players[data.player1] : (index == 1 ? players[data.player1] : "Draw"));
 							var spinner = html.find("#spinner");
 							spinner.spinner({step: 0.001, min: 0});
@@ -215,7 +215,7 @@ function EtherSweepUI() {
 
 	var controller;
 	var state = 0;
-	var categories = [["", "Coming soon"]];
+	var categories = [["random", "Random events"]];
 	var loadingScreen = new Tabs(1, ["Loading"]);
 	var metamaskScreen = new Tabs(2, ["Getting Started"]);
 	var metamaskUnlockScreen = new Tabs(6, ["Metamask"]);

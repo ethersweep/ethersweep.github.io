@@ -17,6 +17,9 @@
 			.ui-spinner {
 				width: 100%;
 			}
+			.eventTable:hover {
+				background-color: rgba(255, 255, 255, 0.05);
+			}
 			.eventTable {
 				width: 100%;
 				border: 0px;
@@ -71,7 +74,8 @@
 				ui.render(function() {
 					if (typeof web3 !== "undefined") {
 						var address = {
-							"1": "0xb1ceDa4F0BA82d9f33605Df02180474a8e831909"
+							"1": "0xb1ceDa4F0BA82d9f33605Df02180474a8e831909",
+							"3": "0xf54cd300fcfb841269c98a9c43354313d84b7d43"
 						};
 						(function initLoop() {
 							var web3js = new Web3(web3.currentProvider);
