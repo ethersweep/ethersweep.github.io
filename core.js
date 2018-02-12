@@ -58,7 +58,7 @@ function App(web3, contract, decimals, symbol, ui, callback) {
 						player1: data[4],
 						player2: data[5],
 						drawAllowed: data[6],
-						winner: data[7]
+						winner: data[7].toNumber()
 					});
 				});
 			},
