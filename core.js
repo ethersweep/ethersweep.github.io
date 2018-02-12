@@ -57,7 +57,8 @@ function App(web3, contract, decimals, symbol, ui, callback) {
 						tournament: data[3],
 						player1: data[4],
 						player2: data[5],
-						winner: data[6]
+						drawAllowed: data[6],
+						winner: data[7]
 					});
 				});
 			},
